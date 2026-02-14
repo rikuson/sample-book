@@ -1,0 +1,126 @@
+---
+title: &title "Pandoc技術書スターター"
+subtitle: &subtitle "効率的な技術書執筆のためのワークフロー"
+author: &author
+  - "著者名"
+date: &date "2026-01-30"
+lang: &lang "ja"
+description: &description |
+  Pandocを使った効率的な技術書執筆方法を学ぶための実践的なガイドブック。
+  マークダウンからEPUB、PDFへの変換、多言語対応、CI/CDによる自動化まで、
+  現代的な技術書制作のワークフローを包括的に解説します。
+
+
+# EPUB設定
+cover-image: assets/cover-ja.jpg
+epub-chapter-level: 2
+epub-metadata: |
+  <dc:publisher>Your Publisher</dc:publisher>
+  <dc:rights>Copyright 2025, Your Name</dc:rights>
+  <dc:subject>技術書執筆</dc:subject>
+  <dc:subject>Pandoc</dc:subject>
+  <dc:subject>Markdown</dc:subject>
+
+# PDF設定
+documentclass: book
+classoption:
+  - openany
+  - oneside
+geometry:
+  - margin=2.5cm
+fontsize: 11pt
+
+# 目次設定
+table-of-contents: true
+toc-title: "目次"
+
+# その他の設定
+colorlinks: true
+linkcolor: blue
+urlcolor: blue
+toccolor: black
+
+# カスタムヘッダー (LaTeX/PDF専用)
+header-includes: |
+  \usepackage{luatexja-fontspec}
+
+  % 和文フォント (NotoSansJP)
+  \setmainjfont[
+    Path=../shared/assets/fonts/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    ItalicFeatures={FakeSlant=0.2},
+    BoldItalicFeatures={FakeSlant=0.2}
+  ]{NotoSansJP}
+
+  \setsansjfont[
+    Path=../shared/assets/fonts/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold
+  ]{NotoSansJP}
+
+  % 欧文フォント (NotoSansJP)
+  \setmainfont[
+    Path=../shared/assets/fonts/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    ItalicFeatures={FakeSlant=0.2},
+    BoldItalicFeatures={FakeSlant=0.2}
+  ]{NotoSansJP}
+
+  \setsansfont[
+    Path=../shared/assets/fonts/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold
+  ]{NotoSansJP}
+
+  % 等幅フォント - コード用 (FiraCode)
+  \setmonofont[
+    Path=../shared/assets/fonts/,
+    Extension=.ttf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    ItalicFeatures={FakeSlant=0.2},
+    BoldItalicFeatures={FakeSlant=0.2},
+    Scale=0.9
+  ]{FiraCode}
+
+  % 和文等幅フォント - コード内日本語用
+  \setmonojfont[
+    Path=../shared/assets/fonts/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold
+  ]{NotoSansJP}
+
+colophon:
+  book-title: *title
+  subtitle: *subtitle
+  publish-date: *date
+  edition: "初版 第一刷 発行"
+  author-label: "著作・発行"
+  publisher: *author
+  printer-label: "印刷"
+  printer: *author 
+  illustrator-label: "挿絵"
+  illustrator: ""  # 空の場合は表示されない
+  email-label: "メールアドレス"
+  email: "example@gmail.com"
+  web-label: "Web"
+  web: ""
+  disclaimer: "落丁・乱丁の際は在庫がある限りお取り替えいたします。上記のメールアドレスまでご連絡ください。"
+
+# リソースファイル
+resource-path:
+  - "../shared/assets"
+---

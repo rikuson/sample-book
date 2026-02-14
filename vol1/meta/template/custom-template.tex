@@ -1,0 +1,249 @@
+\documentclass[
+  book, % 本
+  paper=a5paper, % A5版(148mm*210mm)
+  jafontsize=12Q, % 和文フォントサイズを12級に
+  baselineskip=20.4H, % 行送りを1.7文字=20.4歯に
+  line_length=37zw, % 1行の文字数を37文字に（版面幅は37*12Q=111mm）
+  number_of_lines=35, % 1ページあたりの行数を35行に（版面高さは(35+(35-1)*0.7)*12Q=178.5mm）
+  twoside, % 両面印刷（奇数ページと偶数ページのデザインを変える）
+  openany, % 章の区切りを左右両ページで許す
+  gutter=20mm, % ノド側（綴じ側）の余白を20mmに
+  headfoot_sidemargin=-8mm, % 柱とノンブルを版面の横8mm分外側に配置
+  headfoot_verticalposition=8mm, % 柱とノンブルを版面の下8mm分外側に配置
+]{jlreq}
+
+% ページスタイルの設定
+% ノンブルを小口側下に配置
+\NewPageStyle{mainstyle}{nombre_position=bottom-fore-edge}
+\pagestyle{mainstyle}
+
+% 数式記号（チェックボックスなど）
+\usepackage{amssymb}
+
+% 画像とグラフィックスの処理
+\usepackage{graphicx}
+\usepackage{adjustbox}
+
+% pandocの画像処理用コマンド
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% 必要に応じて画像を拡大縮小し、デフォルトでページ余白からはみ出さないようにする
+% \includegraphics[width, height, ...]{} の明示的オプションで上書きすることもできる
+\setkeys{Gin}{width=0.8\textwidth,height=0.2\textheight,keepaspectratio}
+% 図の配置先の既定を htbp にする
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+% pandocboundedコマンドの定義 - 画像を見やすいサイズで表示
+\newcommand{\pandocbounded}[1]{%
+  \adjustbox{width=\textwidth, max height=0.2\textheight, min width=0.6\textwidth, center}{#1}%
+}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+% pandoc の表変換バグへの対処: 欠落している 'none' カウンタを定義
+\newcounter{none}
+
+\usepackage[]{tcolorbox}
+\tcbuselibrary{breakable,skins}
+
+% Pandoc fenced divs 用のカスタム環境
+% :::note 用（jlreqで\noteが定義済みのためnoteboxを使用）
+\newtcolorbox{notebox}{
+  enhanced,
+  breakable,
+  colback=gray!5,
+  colframe=gray!50,
+  fonttitle=\bfseries,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=0.5pt,
+  arc=2pt
+}
+
+% :::warning 用
+\newtcolorbox{warning}{
+  enhanced,
+  breakable,
+  colback=yellow!10,
+  colframe=orange!70,
+  fonttitle=\bfseries,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=0.5pt,
+  arc=2pt
+}
+
+% :::tip 用
+\newtcolorbox{tip}{
+  enhanced,
+  breakable,
+  colback=green!5,
+  colframe=green!50!black,
+  fonttitle=\bfseries,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt,
+  boxrule=0.5pt,
+  arc=2pt
+}
+
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % 利用可能なら URL の改行を有効化
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % URL に等幅フォントを使わない
+\usepackage{color}
+\usepackage{fancyvrb}
+
+% 箇条書き
+\def\tightlist{\itemsep1pt\parskip0pt\parsep0pt}
+
+% ここからソースコードを挿入するための設定
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+% 1 行あたりの文字数を増やすには ',fontsize=\small' を追加
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textbf{#1}}
+\newcommand{\AnnotationTok}[1]{\textit{#1}}
+\newcommand{\AttributeTok}[1]{#1}
+\newcommand{\BaseNTok}[1]{#1}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textit{#1}}
+\newcommand{\ConstantTok}[1]{#1}
+\newcommand{\ControlFlowTok}[1]{\textbf{#1}}
+\newcommand{\DataTypeTok}[1]{\underline{#1}}
+\newcommand{\DecValTok}[1]{#1}
+\newcommand{\DocumentationTok}[1]{\textit{#1}}
+\newcommand{\ErrorTok}[1]{\textbf{#1}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{#1}
+\newcommand{\FunctionTok}[1]{#1}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textit{#1}}
+\newcommand{\KeywordTok}[1]{\textbf{#1}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{#1}
+\newcommand{\OtherTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textbf{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{#1}
+\newcommand{\SpecialStringTok}[1]{#1}
+\newcommand{\StringTok}[1]{#1}
+\newcommand{\VariableTok}[1]{#1}
+\newcommand{\VerbatimStringTok}[1]{#1}
+\newcommand{\WarningTok}[1]{\textit{#1}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\usepackage{fvextra}
+\usepackage{xcolor}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}, breaklines, breaknonspaceingroup, breakanywhere, frame=single, rulecolor=\color{gray}, framesep=3pt, fontsize=\small}
+% ここまでソースコードを挿入するための設定
+
+% フォントを変更可能にする
+\usepackage{luatexja-fontspec}
+
+% 振り仮名を振れるようにする
+\usepackage{luatexja-ruby}
+
+% 高度なデザインのためのTikZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, decorations.pathmorphing}
+
+% 見出しデザインのカスタマイズ
+\usepackage[explicit]{titlesec}
+
+% LaTeX側の番号付けを完全に無効化（Luaフィルターで管理）
+\setcounter{secnumdepth}{-2}
+
+% 章（Chapter）のデザイン - 番号なし
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries}
+  {}
+  {0pt}
+  {#1}
+
+% 節（Section）のデザイン - 番号なし
+\titleformat{\section}
+  {\normalfont\Large\bfseries}
+  {}
+  {0pt}
+  {#1}
+
+% 小節（Subsection）のデザイン - 番号なし
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}
+  {}
+  {0pt}
+  {#1}
+
+% 段落（Subsubsection）のデザイン - 番号なし
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}
+  {}
+  {0pt}
+  {#1}
+
+% 目次に出すのを節（見出しレベル1）までにする
+\setcounter{tocdepth}{1}
+
+% etoolbox を使用
+\usepackage{etoolbox}
+
+\begin{document}
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$else$
+\date{}
+$endif$
+\maketitle
+
+\tableofcontents
+
+$body$
+
+% 改ページ
+\clearpage
+
+$if(colophon)$
+% 奥付ここから
+\null\vfill
+\section*{$colophon.book-title$$if(colophon.subtitle)$\\{\small $colophon.subtitle$}$endif$}
+\hrule\vskip.5mm\hrule\vskip3mm
+\begin{tabular}{ll}
+$if(colophon.publish-date)$$colophon.publish-date$$endif$& $if(colophon.edition)$$colophon.edition$$endif$\\
+\end{tabular}
+\vskip1em
+\begin{tabular}{ll}
+$if(colophon.author-label)$$colophon.author-label$$endif$& $if(colophon.publisher)$$colophon.publisher$$endif$\\
+$if(colophon.printer-label)$$colophon.printer-label$$endif$& $if(colophon.printer)$$colophon.printer$$endif$\\
+$if(colophon.illustrator-label)$$if(colophon.illustrator)$$colophon.illustrator-label$& $colophon.illustrator$$endif$$endif$\\
+\end{tabular}
+\vskip1em
+\begin{tabular}{ll}
+$if(colophon.email-label)$$colophon.email-label$$endif$ & $if(colophon.email)$\href{mailto:$colophon.email$}{\nolinkurl{$colophon.email$}}$endif$\\
+$if(colophon.web-label)$$colophon.web-label$$endif$ & $if(colophon.web)$\url{$colophon.web$}$endif$\\
+\end{tabular}
+\vskip3mm\hrule\vskip3mm
+$if(colophon.disclaimer)${\scriptsize $colophon.disclaimer$}$endif$
+% 奥付ここまで
+$endif$
+\end{document}
